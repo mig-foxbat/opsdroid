@@ -18,6 +18,6 @@ retry_counter,
 retry_indefinitely,
 retry_interval,
 attempt_count
-from ops_exec where queued_time = '{{run_date}}'
-or start_time = '{{run_date}}'
-or end_time = '{{run_date}}';
+from ops_exec where cast(queued_time as date)= '{{run_date}}'
+or cast(start_time as date) = '{{run_date}}'
+or cast(end_time as date) = '{{run_date}}';
