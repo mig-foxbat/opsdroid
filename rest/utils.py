@@ -30,7 +30,6 @@ def execute_query(sql):
 def compose_sql(query,param):
     querystring =  open(os.path.join(settings.TEMPLATE_DIR,'rest',query+'.sql')).read()
     t =Template(querystring)
-    print({param_mapping[query]:param})
     return t.render(Context({param_mapping[query]:param}))
 
 
