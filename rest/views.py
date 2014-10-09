@@ -13,6 +13,7 @@ def query_metadata(request,**kwargs):
     'date' : 'date'
     ,'instance':'exec_id'
     ,'list': 'type'
+    ,'history' : 'task_id'
     }
 
     sql = utils.compose_sql(kwargs['query'],kwargs[key_mapping[kwargs['query']]])

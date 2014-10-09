@@ -11,10 +11,11 @@ param_mapping = {
     'date':'run_date'
     ,'instance':'exec_id'
     ,'list':'task_type'
+    ,'history':'task_id'
     }
 
-ssh = paramiko.SSHClient()
-ssh.load_host_keys(config.ssh['known_hosts'])
+#ssh = paramiko.SSHClient()
+#ssh.load_host_keys(config.ssh['known_hosts'])
 
 ######################### One Time Initialization when module loads #########################################
 
