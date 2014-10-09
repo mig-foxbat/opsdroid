@@ -1,5 +1,5 @@
 # Create your views here.
-import utils
+import utils,json
 from django.http import HttpResponse
 from django.views.decorators.http import require_http_methods
 
@@ -22,10 +22,12 @@ def query_metadata(request,**kwargs):
 
 @require_http_methods(['GET'])
 def get_job_log(request,agent=None,exec_id=None):
-    result = utils.read_remote_file(agent,exec_id)
-    response = HttpResponse(result,content_type="text/plain")
+    stdout = utils.read_remote_file(agent,exec_id,'stdout')
+    stderr = utils.read_remote_file(agent,exec_id,'stderr')
+    result = { 'stdout': stdout
+                ,'stderr' : stderr }
+    response = HttpResponse(json.dumps(result,indent=4),content_type="text/plain")
     return response
-
 
 
 
