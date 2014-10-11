@@ -7,6 +7,15 @@ from django.views.decorators.http import require_http_methods
 
 
 @require_http_methods(['GET'])
+def query_trigger_names(request):
+    sql = 'SELECT sys_id,sys_class_name,name from ops_trigger;'
+    result = utils.execute_query(sql)
+    response = HttpResponse(result,content_type="text/plain")
+    return response;
+
+
+
+@require_http_methods(['GET'])
 def query_metadata(request,**kwargs):
 
     key_mapping = {
@@ -14,9 +23,12 @@ def query_metadata(request,**kwargs):
     ,'instance':'exec_id'
     ,'list': 'type'
     ,'history' : 'task_id'
+    ,'cron':'trigger_id'
+    ,'time':'trigger_id'
     }
 
     sql = utils.compose_sql(kwargs['query'],kwargs[key_mapping[kwargs['query']]])
+    print(sql)
     result = utils.execute_query(sql)
     response = HttpResponse(result,content_type="text/plain")
     return response

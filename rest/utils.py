@@ -12,6 +12,8 @@ param_mapping = {
     ,'instance':'exec_id'
     ,'list':'task_type'
     ,'history':'task_id'
+    ,'cron':'trigger_id'
+    ,'time':'trigger_id'
     }
 
 #ssh = paramiko.SSHClient()
@@ -22,7 +24,7 @@ param_mapping = {
 def execute_query(sql):
     cursor = connection.cursor()
     cursor.execute(sql)
-    rows = cursor.          fetchall()
+    rows = cursor.fetchall()
     result = json.dumps([dict(zip([col[0] for col in cursor.description],row)) for row in rows],indent=4,sort_keys=True)
     cursor.close()
     return result
