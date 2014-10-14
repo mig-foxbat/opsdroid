@@ -4,7 +4,7 @@ a.name
 ,CASE WHEN enabled = 0 THEN 'false' ELSE 'True' END AS enabled
 ,d.name AS task_name
 ,c.name AS calendar_name
-,skip_count
+,CASE WHEN skip_active = 0 THEN 'False' ELSE 'True' END as skip_when_active
 ,DATE_FORMAT(a.next_scheduled_time,'%Y-%m-%d %H:%i:%s') as next_scheduled_time
 ,a.sys_created_by
 ,DATE_FORMAT(a.sys_created_on,'%Y-%m-%d %H:%i:%s') as sys_created_on

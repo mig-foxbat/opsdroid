@@ -2,6 +2,7 @@ from django.db import connection
 from django.template import Template,Context
 from django.conf import settings
 import os.path,json,paramiko,config
+import requests
 
 
 ######################### One Time Initialization when module loads #########################################
@@ -16,8 +17,8 @@ param_mapping = {
     ,'time':'trigger_id'
     }
 
-#ssh = paramiko.SSHClient()
-#ssh.load_host_keys(config.ssh['known_hosts'])
+ssh = paramiko.SSHClient()
+ssh.load_host_keys(config.ssh['known_hosts'])
 
 ######################### One Time Initialization when module loads #########################################
 
@@ -56,5 +57,19 @@ def get_agent_host_name(agent_sys_id):
     row = cursor.fetchone()
     cursor.close()
     return row[0]
+
+
+def post_to_opswise(url,form_data):
+    sess = requests.session()
+    login_post_form = { 'user_name':form_data.pop('user_name',None)
+                    ,'user_password':form_data.pop('user_password',None)
+                    ,'sys_action':'sysverb_login'
+                    }
+    sess.post(config.opswise_urls['base']+config.opswise_urls['login'],data=login_post_form)
+    resp = sess.post(url,data=form_data)
+    sess.close()
+    return resp.content
+
+
 
 

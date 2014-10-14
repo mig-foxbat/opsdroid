@@ -9,4 +9,11 @@ ssh = {
 }
 
 
+opswise_urls = {
+        'base':'http://pit-dev-owmaster1.snc1/opswise'
+        ,'login':'/login.do'
+        ,'action':'/xmlhttp.do'
+}
+
+
 

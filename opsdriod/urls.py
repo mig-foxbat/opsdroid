@@ -13,8 +13,9 @@ urlpatterns = patterns('rest.views',
                        url(r'^tasks/log/agent/(?P<agent>.+)/(?P<exec_id>[\w]+)/$', 'get_job_log'),
                        url(r'^tasks/history/(?P<task_id>[\w]+)/$', 'query_metadata', {'query':'history'}),
                        url(r'^triggers/list/$', 'query_trigger_names'),
-                       url(r'^triggers/cron/(?P<trigger_id>[\w]+)/$', 'query_metadata',{'query':'cron'}),
-                       url(r'^triggers/time/(?P<trigger_id>[\w]+)/$', 'query_metadata',{'query':'time'}),
+                       url(r'^triggers/ops_trigger_cron/(?P<trigger_id>[\w]+)/$', 'query_metadata',{'query':'cron'}),
+                       url(r'^triggers/ops_trigger_time/(?P<trigger_id>[\w]+)/$', 'query_metadata',{'query':'time'}),
+                       url(r'^actions/(?P<action>[\w]+)/ops_task_unix/(?P<task_id>[\w]+)/$', 'task_action'),
 )
 
 
